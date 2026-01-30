@@ -3,19 +3,19 @@
 	protocol="http://"
 %>
 <script type="text/javascript">//<![CDATA[
-XHR.poll(3, '<%=url([[admin]], [[vpn]], [[easytier]], [[status]])%>', null,
+XHR.poll(3, '<%=url([[admin]], [[services]], [[easytier]], [[status]])%>', null,
     function(x, data) {
         var st = document.getElementById('easytier_status');
         if (data && st) {
             var html = '';
             
-            // easytier-core 状态
+            // ET组网 状态
             var coreStatus = data.crunning 
                 ? "<span style='color:#4CAF50;font-weight:bold;'>● 运行中</span>" 
                 : "<span style='color:#F44336;font-weight:bold;'>○ 未运行</span>";
             
             html += "<div style='margin-bottom:16px;'>";
-            html += "<div style='font-size:15px;font-weight:bold;margin-bottom:8px;'>easytier-core " + coreStatus + "</div>";
+            html += "<div style='font-size:15px;font-weight:bold;margin-bottom:8px;'>ET组网 " + coreStatus + "</div>";
             
             if (data.crunning) {
                 html += "<table style='border-collapse:collapse;'>";
@@ -26,13 +26,13 @@ XHR.poll(3, '<%=url([[admin]], [[vpn]], [[easytier]], [[status]])%>', null,
             }
             html += "</div>";
             
-            // easytier-web 状态
+            // ET组网-web 状态
             var webStatus = data.wrunning 
                 ? "<span style='color:#4CAF50;font-weight:bold;'>● 运行中</span>" 
                 : "<span style='color:#F44336;font-weight:bold;'>○ 未运行</span>";
             
             html += "<div>";
-            html += "<div style='font-size:15px;font-weight:bold;margin-bottom:8px;'>easytier-web " + webStatus + "</div>";
+            html += "<div style='font-size:15px;font-weight:bold;margin-bottom:8px;'>ET组网-web " + webStatus + "</div>";
             
             if (data.wrunning) {
                 html += "<table style='border-collapse:collapse;'>";
