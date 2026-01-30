@@ -1,10 +1,12 @@
 local http = luci.http
 local nixio = require "nixio"
- 
+
+m = Map("easytier")
+  
 m:section(SimpleSection).template  = "easytier/easytier_status"
 
 -- easytier-core
-s=m:section(TypedSection, "easytier", translate("EasyTier Configuration"))
+s=m:section(TypedSection, "easytier", translate("ET组网 配置"))
 s.addremove=false
 s.anonymous=true
 s:tab("general", translate("General Settings"))
@@ -27,9 +29,9 @@ btncq.write = function()
 end
 
 etcmd = s:taboption("general", ListValue, "etcmd", translate("Startup Method"),
-        translate("Official Web Console: <a href=\"https://easytier.cn/web\" target=\"_blank\">https://easytier.cn/web</a><br>"
-                .. "Official Configuration File Generator: <a href=\"https://easytier.cn/web/index.html#/config_generator\" target=\"_blank\">"
-                .. "https://easytier.cn/web/index.html#/config_generator</a><br>Please note to set the RPC port to 15888"))
+        translate("官方Web控制台: <a href=\"https://easytier.cn/web\" target=\"_blank\">点击登陆进入控制台</a><br>"
+                .. "配置文件: <a href=\"https://easytier.cn/web/index.html#/config_generator\" target=\"_blank\">"
+                .. "点击进入配置文件</a><br>"))
 etcmd.default = "etcmd"
 etcmd:value("etcmd", translate("Default"))
 etcmd:value("config", translate("Configuration File"))
@@ -57,10 +59,10 @@ et_config.write = function(self, section, value)
 end
 
 web_config = s:taboption("general", Value, "web_config", translate("Web Server Address"),
-        translate("Web configuration server address. (-w parameter)<br>"
-                .. "For a self-hosted Web server, use the format: udp://server_address:22020/username<br>"
-                .. "For the official Web server, use the format: username<br>"
-                .. "Official Web Console: <a href='https://easytier.cn/web'>easytier.cn/web</a>"))
+        translate("Web配置服务器地址. (-w 参数)<br>"
+                .. "自建Web服务器 输入格式： udp://服务器地址:22020/账户名<br>"
+                .. "官方Web服务器 输入格式：账户名<br>"
+                .. "官方Web控制台: <a href='https://easytier.cn/web'>点击登陆进入控制台</a>"))
 web_config.placeholder = "admin"
 web_config:depends("etcmd", "web")
 
