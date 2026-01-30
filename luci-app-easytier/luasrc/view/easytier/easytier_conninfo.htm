@@ -122,7 +122,7 @@ function refreshConnInfo() {
 	btn.disabled = true;
 	btn.value = '刷新中...';
 	
-	XHR.get('<%=url([[admin]], [[vpn]], [[easytier]], [[conninfo]])%>', null,
+	XHR.get('<%=url([[admin]], [[services]], [[easytier]], [[conninfo]])%>', null,
 		function(x, data) {
 			updateConnInfo(data);
 			btn.disabled = false;
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 自动刷新 (每5秒)
-XHR.poll(5, '<%=url([[admin]], [[vpn]], [[easytier]], [[conninfo]])%>', null,
+XHR.poll(5, '<%=url([[admin]], [[services]], [[easytier]], [[conninfo]])%>', null,
 	function(x, data) {
 		updateConnInfo(data);
 		var ts = document.getElementById('conninfo_timestamp');
